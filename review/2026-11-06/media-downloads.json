@@ -1,0 +1,32 @@
+[
+  {
+    "ref": "notion-file-block://40cdf332-0152-80c9-b1c0-e0ae1317fc65/4811c809-4b28-4a44-91cf-9923d8d2667c?space_id=6e5b96ae-1c6b-4169-9103-4688d0b52d7f&name=image.png",
+    "file": "root-1.png",
+    "downloaded": true
+  },
+  {
+    "ref": "notion-file-block://40cdf332-0152-8077-b66d-eb1a9c1c253f/992fd08f-ab76-40d8-9720-132537a39845?space_id=6e5b96ae-1c6b-4169-9103-4688d0b52d7f&name=image.png",
+    "file": "root-2.png",
+    "downloaded": true
+  },
+  {
+    "ref": "notion-file-block://40cdf332-0152-80db-ae4c-f47f3b92082d/add4fbee-91b9-4f11-b554-71b700c90de3?space_id=6e5b96ae-1c6b-4169-9103-4688d0b52d7f&name=image.png",
+    "file": "root-3.png",
+    "downloaded": true
+  },
+  {
+    "ref": "notion-file-block://40ddf332-0152-8063-9638-e1a3a1e7f541/1a5b0900-3587-4df9-b767-d01fe13c9e46?space_id=6e5b96ae-1c6b-4169-9103-4688d0b52d7f&name=image.png",
+    "file": "root-4.png",
+    "downloaded": true
+  },
+  {
+    "ref": "notion-file-block://40ddf332-0152-805d-9cec-ff2c9217c221/675c592a-cbdf-4f4e-a4da-24840da63b9d?space_id=6e5b96ae-1c6b-4169-9103-4688d0b52d7f&name=image.png",
+    "file": "root-5.png",
+    "downloaded": true
+  },
+  {
+    "ref": "notion-file-block://40cdf332-0152-80f5-9621-f9d17004a5ef/8a2fa92c-dbeb-45bb-a4e1-9d95d06162f3?space_id=6e5b96ae-1c6b-4169-9103-4688d0b52d7f&name=contest-application-consent.docx",
+    "file": "root-6.docx",
+    "downloaded": true
+  }
+]
