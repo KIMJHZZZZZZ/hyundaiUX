@@ -1,0 +1,76 @@
+[
+  {
+    "key": "family",
+    "file": "idea-family.md",
+    "title": "01 우리차 탐험대 — 아이가 고른 공룡과 함께 가는 30분",
+    "icon": "🦕",
+    "id": "411df332-0152-8126-b0f4-c61b54f61509",
+    "url": "https://app.notion.com/p/411df33201528126b0f4c61b54f61509"
+  },
+  {
+    "key": "mate",
+    "file": "idea-mate.md",
+    "title": "02 같이길 — 낯선 여행자와 한 활동부터 함께",
+    "icon": "🧭",
+    "id": "411df332-0152-8183-9b9d-d2e99dfa858a",
+    "url": "https://app.notion.com/p/411df332015281839b9dd2e99dfa858a?pvs=204",
+    "properties": {
+      "title": "02 같이길 — 낯선 여행자와 한 활동부터 함께"
+    }
+  },
+  {
+    "key": "vlog",
+    "file": "idea-vlog.md",
+    "title": "03 로드컷 — 귀가길 회고와 우리 여행의 예고편",
+    "icon": "🎞️",
+    "id": "411df332-0152-81cd-bcb7-dd4c25cfcb84",
+    "url": "https://app.notion.com/p/411df332015281cdbcb7dd4c25cfcb84?pvs=204",
+    "properties": {
+      "title": "03 로드컷 — 귀가길 회고와 우리 여행의 예고편"
+    }
+  },
+  {
+    "key": "shared",
+    "file": "idea-shared.md",
+    "title": "04 여행릴레이 — 여러 차가 함께 만드는 코믹 라디오극",
+    "icon": "📻",
+    "id": "411df332-0152-81ee-b0a3-d466173a8de6",
+    "url": "https://app.notion.com/p/411df332015281eeb0a3d466173a8de6?pvs=204",
+    "properties": {
+      "title": "04 여행릴레이 — 여러 차가 함께 만드는 코믹 라디오극"
+    }
+  },
+  {
+    "key": "arrival",
+    "file": "idea-arrival.md",
+    "title": "05 도착맞춤 빈자리 — 돌아가는 길의 작은 외출",
+    "icon": "🎟️",
+    "id": "411df332-0152-8192-b9f1-c46ef1a11f4f",
+    "url": "https://app.notion.com/p/411df33201528192b9f1c46ef1a11f4f?pvs=204",
+    "properties": {
+      "title": "05 도착맞춤 빈자리 — 돌아가는 길의 작은 외출"
+    }
+  },
+  {
+    "key": "vocal",
+    "file": "idea-vocal.md",
+    "title": "06 앙코르 — 혼자 하는 후렴 연습 · 보류",
+    "icon": "🎤",
+    "id": "411df332-0152-8169-83e6-fa013ffac4e3",
+    "url": "https://app.notion.com/p/411df3320152816983e6fa013ffac4e3?pvs=204",
+    "properties": {
+      "title": "06 앙코르 — 혼자 하는 후렴 연습 · 보류"
+    }
+  },
+  {
+    "key": "quest",
+    "file": "idea-quest-hold.md",
+    "title": "07 캐빈 퀘스트 — 틈새 놀이로 재정의 · 보류",
+    "icon": "⏸️",
+    "id": "411df332-0152-81de-98f1-de7d1ca9fb10",
+    "url": "https://app.notion.com/p/411df332015281de98f1de7d1ca9fb10?pvs=204",
+    "properties": {
+      "title": "07 캐빈 퀘스트 — 틈새 놀이로 재정의 · 보류"
+    }
+  }
+]

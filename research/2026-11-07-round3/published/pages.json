@@ -1,0 +1,35 @@
+[
+  {
+    "key": "mate",
+    "file": "idea-mate.md",
+    "title": "01 같이길 — 만나보고, 한 활동만 함께하는 여행",
+    "icon": "🧭",
+    "id": "411df332-0152-81d4-bce5-da5e61325e2e",
+    "url": "https://app.notion.com/p/411df332015281d4bce5da5e61325e2e?pvs=204",
+    "properties": {
+      "title": "01 같이길 — 만나보고, 한 활동만 함께하는 여행"
+    }
+  },
+  {
+    "key": "rest",
+    "file": "idea-rest-live.md",
+    "title": "02 다음쉼 — 현장에 묻고 다음 정차를 고른다",
+    "icon": "☕",
+    "id": "411df332-0152-81d1-bbca-e2ddbe3fc36a",
+    "url": "https://app.notion.com/p/411df332015281d1bbcae2ddbe3fc36a?pvs=204",
+    "properties": {
+      "title": "02 다음쉼 — 현장에 묻고 다음 정차를 고른다"
+    }
+  },
+  {
+    "key": "family",
+    "file": "family-verdict.md",
+    "title": "03 우리차 탐험대 — 잔여시간 재설계와 출품 제외 판단",
+    "icon": "🦕",
+    "id": "411df332-0152-817b-9db1-e69e99cc1f31",
+    "url": "https://app.notion.com/p/411df3320152817b9db1e69e99cc1f31?pvs=204",
+    "properties": {
+      "title": "03 우리차 탐험대 — 잔여시간 재설계와 출품 제외 판단"
+    }
+  }
+]
