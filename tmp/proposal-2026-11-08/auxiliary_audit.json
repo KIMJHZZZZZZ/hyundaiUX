@@ -1,0 +1,67 @@
+[
+  {
+    "file": "architecture",
+    "width": 2000,
+    "height": 1480,
+    "body": {
+      "w": 2000,
+      "h": 1480
+    },
+    "elements": [
+      {
+        "class": "card device a",
+        "text": "여행자 A\nPleos 앱 창 A\n내 설문 · 회차별 별명\n음성만 / 만남",
+        "x": 70,
+        "y": 235,
+        "w": 490,
+        "h": 720,
+        "overflow": false
+      },
+      {
+        "class": "card device b",
+        "text": "여행자 B\nPleos 앱 창 B\n내 설문 · 회차별 별명\n음성만 / 만남",
+        "x": 1440,
+        "y": 235,
+        "w": 490,
+        "h": 720,
+        "overflow": false
+      },
+      {
+        "class": "card backend",
+        "text": "연결 제어 · 최소 정보\n매칭·동의 백엔드\n✓ 설문 선호·가용 시간\n✓ ",
+        "x": 650,
+        "y": 235,
+        "w": 700,
+        "h": 340,
+        "overflow": false
+      },
+      {
+        "class": "card voice",
+        "text": "WebRTC · TURN relay\n사람 ↔ 사람 음성 채널\n\n중계 전용",
+        "x": 650,
+        "y": 710,
+        "w": 700,
+        "h": 250,
+        "overflow": false
+      },
+      {
+        "class": "card ai",
+        "text": "LLM · 트립 MC\n관심사 기반 첫 질문 생성\n\n선택 주제 → 짧은 질",
+        "x": 650,
+        "y": 1060,
+        "w": 700,
+        "h": 250,
+        "overflow": false
+      },
+      {
+        "class": "footer",
+        "text": "제안 아키텍처: API 가용성·권한·앱 카테고리·DO·오디오 포커스 정책",
+        "x": 70,
+        "y": 1370,
+        "w": 1860,
+        "h": 99.1875,
+        "overflow": false
+      }
+    ]
+  }
+]

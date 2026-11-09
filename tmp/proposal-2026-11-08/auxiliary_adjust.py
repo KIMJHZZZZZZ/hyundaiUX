@@ -1,0 +1,15 @@
+from pathlib import Path
+
+p = Path(r'C:\ssafy\hyundaiUX\tmp\proposal-2026-11-08\auxiliary_visuals.cjs')
+s = p.read_text(encoding='utf-8')
+s = s.replace('.device{top:235px;width:490px;height:655px}', '.device{top:235px;width:490px;height:680px}')
+s = s.replace('height:1020px', 'height:1140px')
+s = s.replace('min-height:150px}', 'min-height:198px;flex-shrink:0}')
+s = s.replace('640,1020,1.5', '640,1140,1.5')
+s = s.replace('.device{top:235px;width:490px;height:680px}', '.device{top:235px;width:490px;height:720px}')
+s = s.replace('말문이 트립! · 각자의 내비는 각자의 단말 안에서, 연결은 최소 정보로', '말문이 트립! · 내비 연동 범위와 음성·AI의 데이터 경계를 구분합니다.')
+s = s.replace('목적지·경로는 단말 안에서 처리', '앱은 자체 매칭 서버와 상대에게<br>정확한 목적지를 보내지 않음')
+s = s.replace('정확한 최종 목적지는 전달·저장하지 않음', '자체 매칭 서버는 정밀 목적지 미수집')
+s = s.replace("fs.writeFileSync(path.join(SRC, 'auxiliary_responsive_portrait.html'), portrait, 'utf8');", "if(!process.argv.includes('--architecture-only')) fs.writeFileSync(path.join(SRC, 'auxiliary_responsive_portrait.html'), portrait, 'utf8');")
+s = s.replace("const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:scale});", "if(process.argv.includes('--architecture-only') && file!=='architecture') continue;\n    const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:scale});")
+p.write_text(s, encoding='utf-8')

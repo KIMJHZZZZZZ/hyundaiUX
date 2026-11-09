@@ -1,0 +1,212 @@
+{
+  "status": "verified",
+  "scope": "공식 02 영역 항목 1부터 6",
+  "date": "2026-11-08",
+  "docx": "C:\\ssafy\\hyundaiUX\\output\\2026-11-08_말문이트립\\말문이_트립_02_서비스_기획서.docx",
+  "docx_sha256": "c5725a4e18f83c2c153107186babe949ed49fe34e819a1493baccf68065f999f",
+  "docx_bytes": 9328358,
+  "image_archive": "C:\\ssafy\\hyundaiUX\\output\\2026-11-08_말문이트립\\말문이_트립_데모_이미지_자료.zip",
+  "image_archive_sha256": "c019b9fe907c5e38d224e532ca12a9e69e102cd189e0dbb3478ef494b04738e4",
+  "image_archive_bytes": 19693001,
+  "archive_entries": 88,
+  "pages": 31,
+  "first_level_sections": [
+    "1 앱 한 줄 소개",
+    "2 기획 배경",
+    "3 앱 주요 기능 및 차량 특화 요소",
+    "4 주요 사용 시나리오",
+    "5 개발 계획",
+    "6 기대효과 및 발전 가능성"
+  ],
+  "figures": 33,
+  "ui_states": 26,
+  "personas": 2,
+  "cited_sources": 52,
+  "root_visual_inspection_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "independent_visual_inspection_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "independent_reviews": [
+    "C:\\ssafy\\hyundaiUX\\research\\2026-11-08-proposal\\review-content-v1.md",
+    "C:\\ssafy\\hyundaiUX\\research\\2026-11-08-proposal\\review-tech-final.md",
+    "C:\\ssafy\\hyundaiUX\\research\\2026-11-08-proposal\\review-ui-v1.md",
+    "C:\\ssafy\\hyundaiUX\\research\\2026-11-08-proposal\\review-layout-final.md"
+  ],
+  "requirements": [
+    {
+      "requirement": "Notion 내용과 댓글 확인",
+      "evidence": [
+        "research/2026-11-08-proposal/notion-snapshot.json",
+        "research/2026-11-08-proposal/notion-comments.xml",
+        "qa/source-current-check.json"
+      ],
+      "result": "본문 동일·댓글 네 건 최종 재확인"
+    },
+    {
+      "requirement": "가독성 있는 DOC 기획서 02 항목 1부터 6",
+      "evidence": [
+        "DOCX six Heading1 values",
+        "31 Word-rendered page PNGs",
+        "review-layout-final.md"
+      ],
+      "result": "31쪽 전부 시각 확인·빈 페이지 없음"
+    },
+    {
+      "requirement": "설문부터 종료까지 단계별 화면 자료",
+      "evidence": [
+        "S01–S21 plus five branch states",
+        "screen_manifest.json",
+        "52 UI PNGs in ZIP"
+      ],
+      "result": "26개 상태·음성 전용/선택형 만남/예외/여행 종료 포함"
+    },
+    {
+      "requirement": "실제 근거 기반 배경",
+      "evidence": [
+        "B01–B06",
+        "review-content-v1.md"
+      ],
+      "result": "통계 모집단·날짜·한계와 가설 구분"
+    },
+    {
+      "requirement": "차량 특화 핵심 조사",
+      "evidence": [
+        "section3",
+        "T05–T07 and T02–T04"
+      ],
+      "result": "실제 내비 여정과 안전한 주차 순간을 핵심으로 제시"
+    },
+    {
+      "requirement": "페르소나 이미지와 구체적 시나리오",
+      "evidence": [
+        "persona_seoyun.png",
+        "persona_junho.png",
+        "DOCX pages6–7"
+      ],
+      "result": "가상임을 표시한 두 페르소나와 시간·상황별 행동"
+    },
+    {
+      "requirement": "직접 SDK 문서 확인과 상세 개발 범위",
+      "evidence": [
+        "section5",
+        "pleos-sdk.md",
+        "aaos-addendum.md",
+        "review-tech-final.md"
+      ],
+      "result": "권한·API·버전 불일치·실기 미확인·PT 이전 구현 계획 명시"
+    },
+    {
+      "requirement": "기존 만남·소개팅 앱 조사",
+      "evidence": [
+        "8-service matrix",
+        "B08–B21",
+        "source-demand.json"
+      ],
+      "result": "공식 제품 문서 기반 비교와 적용/비적용 판단"
+    },
+    {
+      "requirement": "고객·예상 MAU·재방문율·확장 계획",
+      "evidence": [
+        "section6",
+        "forecast-audit.json",
+        "research questionnaire and KPI table"
+      ],
+      "result": "측정된 배경과 가정 모델 분리·독립 산술 검증"
+    },
+    {
+      "requirement": "실제 Pleos 인터페이스 참고와 파일 저장",
+      "evidence": [
+        "official window PNG and layout SVG",
+        "T19–T20",
+        "UI full-frame and portrait assets"
+      ],
+      "result": "시안과 실기 실행을 구분·원본과 확대본 ZIP 저장"
+    },
+    {
+      "requirement": "에이전트의 반복 검수",
+      "evidence": [
+        "review-content-v1.md",
+        "review-tech-final.md",
+        "review-ui-v1.md",
+        "review-layout-final.md"
+      ],
+      "result": "수요·산술·SDK·개인정보·UI·최종 Word 배치를 여러 단계로 검토"
+    }
+  ],
+  "forecast_scenarios": [
+    {
+      "scenario": "낮음",
+      "MAU3": 96,
+      "MAU12": 138,
+      "Mplus1": 10.58,
+      "Mplus3": 8.57,
+      "measured": false
+    },
+    {
+      "scenario": "기준",
+      "MAU3": 407,
+      "MAU12": 859,
+      "Mplus1": 24.62,
+      "Mplus3": 22.22,
+      "measured": false
+    },
+    {
+      "scenario": "높음",
+      "MAU3": 1384,
+      "MAU12": 3691,
+      "Mplus1": 39.33,
+      "Mplus3": 37.01,
+      "measured": false
+    }
+  ],
+  "limits": "실제 이용자 조사·APK 빌드·실물 Pleos 설치·통화 성공·운영 MAU를 달성했다는 주장은 없음. 요청한 결과물은 기획서와 데모 이미지 자료."
+}

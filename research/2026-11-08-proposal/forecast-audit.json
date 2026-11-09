@@ -1,0 +1,159 @@
+{
+  "audit_date": "2026-11-08",
+  "audit_method": "Independent Python math implementation; direct cohort summation cross-checked against finite geometric-series closed form.",
+  "status": "passed",
+  "data_status": "All reach, conversion, trip-frequency, per-trip-use, and willingness-survival inputs are unmeasured planning assumptions. Outputs are conditional scenario calculations, not actual MAU, installed-base estimates, measured retention, or confidence intervals.",
+  "eligible_reach_definition": "Deduplicated primary drivers in a hypothetical domestic Pleos Connect-compatible pilot distribution cohort. F is reachable drivers, not known installed vehicles or current active accounts.",
+  "observed_installed_base": null,
+  "observed_installed_base_note": "No current Korean eligible installed-base quantity was verified; no number is assumed to be measured.",
+  "mau_definition": "Deduplicated accounts with at least one valid connection request or actual voice session during the calendar month. Failed matching after a valid request counts as MAU; app-open-only and simulated users do not.",
+  "retention_definition": "R_k is the share of a first-valid-request monthly cohort active again in calendar month k after first activation. R_0=1. It is not D30 or opportunity-conditioned reuse.",
+  "formulas": {
+    "A": "monthly_reach * target_share * exposure_rate * first_activation_rate",
+    "q": "1 - exp(-monthly_eligible_trip_frequency * use_probability_per_trip)",
+    "R_k": "q * monthly_willingness_survival ** k, for k >= 1",
+    "MAU_t": "A * (1 + q * sum(a ** k for k in range(1,t)))"
+  },
+  "assumptions": [
+    "Constant new first-active cohort A each month from month 1.",
+    "Poisson monthly eligible usage opportunities with rate lambda*u.",
+    "Monthly willingness survival independent of opportunity arrival and per-opportunity use.",
+    "No seasonality, reactivation after permanent willingness loss, matching-success effects, or shared-car account duplication included.",
+    "Actual voice-connected MAU must be reported separately from valid-request MAU."
+  ],
+  "inputs": [
+    {
+      "scenario": "low",
+      "F3": 15000,
+      "F12": 60000,
+      "monthly_reach": 5000,
+      "target_share": 0.2,
+      "exposure_rate": 0.4,
+      "first_activation_rate": 0.2,
+      "monthly_eligible_trip_frequency": 0.25,
+      "use_probability_per_trip": 0.5,
+      "monthly_willingness_survival": 0.9
+    },
+    {
+      "scenario": "base",
+      "F3": 30000,
+      "F12": 120000,
+      "monthly_reach": 10000,
+      "target_share": 0.2,
+      "exposure_rate": 0.55,
+      "first_activation_rate": 0.25,
+      "monthly_eligible_trip_frequency": 0.5,
+      "use_probability_per_trip": 0.6,
+      "monthly_willingness_survival": 0.95
+    },
+    {
+      "scenario": "high",
+      "F3": 60000,
+      "F12": 240000,
+      "monthly_reach": 20000,
+      "target_share": 0.2,
+      "exposure_rate": 0.65,
+      "first_activation_rate": 0.3,
+      "monthly_eligible_trip_frequency": 0.8,
+      "use_probability_per_trip": 0.65,
+      "monthly_willingness_survival": 0.97
+    }
+  ],
+  "outputs": [
+    {
+      "scenario": "low",
+      "monthly_first_active": 80.0,
+      "q": 0.11750309741540459,
+      "q_percent": 11.750309741540459,
+      "cohort_retention": {
+        "1": 0.10575278767386413,
+        "3": 0.08565975801582995,
+        "11": 0.03687371704234946
+      },
+      "cohort_retention_percent": {
+        "1": 10.575278767386413,
+        "3": 8.565975801582995,
+        "11": 3.6873717042349456
+      },
+      "mau_month_3": 96.07442372642736,
+      "mau_month_12": 138.0531538685997,
+      "mau_month_3_rounded": 96,
+      "mau_month_12_rounded": 138,
+      "cumulative_first_active_month_12": 960.0,
+      "arithmetic_checks": "passed"
+    },
+    {
+      "scenario": "base",
+      "monthly_first_active": 275.0,
+      "q": 0.2591817793182821,
+      "q_percent": 25.91817793182821,
+      "cohort_retention": {
+        "1": 0.24622269035236802,
+        "3": 0.2222159780430121,
+        "11": 0.14742261999261588
+      },
+      "cohort_retention_percent": {
+        "1": 24.6222690352368,
+        "3": 22.22159780430121,
+        "11": 14.742261999261588
+      },
+      "mau_month_3": 407.03691770145736,
+      "mau_month_12": 858.9416074766056,
+      "mau_month_3_rounded": 407,
+      "mau_month_12_rounded": 859,
+      "cumulative_first_active_month_12": 3300.0,
+      "arithmetic_checks": "passed"
+    },
+    {
+      "scenario": "high",
+      "monthly_first_active": 780.0,
+      "q": 0.4054794520298057,
+      "q_percent": 40.547945202980564,
+      "cohort_retention": {
+        "1": 0.3933150684689115,
+        "3": 0.37007014792239884,
+        "11": 0.2900400209603059
+      },
+      "cohort_retention_percent": {
+        "1": 39.33150684689115,
+        "3": 37.007014792239886,
+        "11": 29.00400209603059
+      },
+      "mau_month_3": 1384.3679342093294,
+      "mau_month_12": 3691.382451572782,
+      "mau_month_3_rounded": 1384,
+      "mau_month_12_rounded": 3691,
+      "cumulative_first_active_month_12": 9360.0,
+      "arithmetic_checks": "passed"
+    }
+  ],
+  "verified_requested_display_values": {
+    "M3": [
+      96,
+      407,
+      1384
+    ],
+    "M12": [
+      138,
+      859,
+      3691
+    ],
+    "R1_percent": [
+      10.58,
+      24.62,
+      39.33
+    ],
+    "R3_percent": [
+      8.57,
+      22.22,
+      37.01
+    ]
+  },
+  "audit_assertions": [
+    "F3 == 3 * monthly_reach and F12 == 12 * monthly_reach.",
+    "Direct cohort sum equals finite-series closed form at relative tolerance 1e-12.",
+    "MAU does not exceed cumulative first-active users.",
+    "Retention values remain in [0,1] and decline with cohort age.",
+    "Rounded M3, M12, R1, and R3 exactly match the requested displays."
+  ]
+}
