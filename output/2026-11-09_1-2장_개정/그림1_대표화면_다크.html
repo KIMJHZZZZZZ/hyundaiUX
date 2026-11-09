@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>fig1</title>
+<style>
+@font-face{font-family:NotoKR;src:url('file:///C:/Windows/Fonts/NotoSansKR-VF.ttf');font-weight:100 900}
+@font-face{font-family:Bahn;src:url('file:///C:/Windows/Fonts/bahnschrift.ttf');font-weight:200 700;font-stretch:75% 100%}
+:root{--ink:#f2f4f9;--mute:#8d95a8;--dim:#5a6173;--line:rgba(255,255,255,.08);--acc:#6f7dff;--acc2:#3fd2ff;--live:#37e29b;--warm:#ff9a5c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:transparent}
+body{width:1920px;height:1080px;font-family:NotoKR,'Malgun Gothic',sans-serif;color:var(--ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+.screen{position:absolute;inset:0;border-radius:36px;border:9px solid #1c1f26;background:#020203;overflow:hidden;box-shadow:inset 0 0 0 1px #2b2f38}
+.num{font-family:Bahn,NotoKR,sans-serif}
+/* status bar */
+.status{position:absolute;left:0;right:0;top:0;height:46px;display:flex;align-items:center;justify-content:flex-end;gap:18px;padding:0 34px;color:#9aa1b2;font-size:18px}
+.status .num{font-size:20px;color:#d7dbe6;letter-spacing:.5px}
+/* driving view */
+.drive{position:absolute;left:22px;top:50px;width:540px;height:912px;border-radius:26px;background:linear-gradient(170deg,#0c0e13 0%,#07080b 60%,#050608 100%);border:1px solid var(--line);overflow:hidden}
+.speed{position:absolute;left:34px;top:26px;display:flex;align-items:flex-end;gap:12px}
+.speed b{font-family:Bahn;font-weight:300;font-size:128px;line-height:.9;letter-spacing:-2px}
+.speed small{font-size:20px;color:var(--mute);padding-bottom:12px}
+.gears{position:absolute;right:30px;top:40px;display:flex;gap:6px;font-family:Bahn;font-size:26px;font-weight:600}
+.gears span{width:42px;height:46px;display:grid;place-items:center;border-radius:10px;color:#3d4250}
+.gears .on{color:#fff;background:linear-gradient(135deg,var(--acc),#4f5bf0);box-shadow:0 0 24px rgba(111,125,255,.55)}
+.park{position:absolute;left:34px;top:178px;display:flex;align-items:center;gap:10px;font-size:19px;color:#cfd5e2}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--live);box-shadow:0 0 12px var(--live)}
+.map{position:absolute;left:18px;top:228px;width:504px;height:520px;border-radius:20px;overflow:hidden;background:#06080c;border:1px solid var(--line)}
+.dfoot{position:absolute;left:34px;right:34px;bottom:30px;display:flex;justify-content:space-between;align-items:flex-end}
+.dfoot .loc{font-size:22px;font-weight:600}
+.dfoot .loc small{display:block;font-size:17px;color:var(--mute);font-weight:400;margin-top:4px}
+.dfoot .rng{text-align:right;font-size:17px;color:var(--mute)}
+.dfoot .rng b{display:block;font-family:Bahn;font-size:30px;color:#e6e9f1;font-weight:400}
+/* app window */
+.app{position:absolute;left:584px;top:50px;width:1306px;height:912px;border-radius:26px;background:linear-gradient(160deg,#10131a 0%,#0b0d12 55%,#090a0e 100%);border:1px solid rgba(255,255,255,.1);overflow:hidden}
+.app:before{content:"";position:absolute;right:-180px;top:-220px;width:720px;height:520px;background:radial-gradient(closest-side,rgba(111,125,255,.22),transparent);pointer-events:none}
+.app:after{content:"";position:absolute;left:-120px;bottom:-260px;width:640px;height:480px;background:radial-gradient(closest-side,rgba(63,210,255,.10),transparent);pointer-events:none}
+.head{position:absolute;left:44px;right:44px;top:30px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .logo{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:grid;place-items:center;transform:skewX(-8deg)}
+.brand h1{font-size:30px;font-weight:800;letter-spacing:-.5px;font-style:italic}
+.brand h1 i{color:var(--acc2);font-style:italic}
+.badges{display:flex;gap:10px}
+.badge{display:flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:17px;color:#cdd3e1}
+.badge.acc{border-color:rgba(111,125,255,.5);background:rgba(111,125,255,.12);color:#dfe3ff}
+/* stepper */
+.steps{position:absolute;left:44px;right:44px;top:104px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.step .bar{height:8px;border-radius:4px;background:#232734;transform:skewX(-24deg)}
+.step.done .bar{background:linear-gradient(90deg,var(--acc),var(--acc2));box-shadow:0 0 18px rgba(63,210,255,.45)}
+.step.next .bar{background:linear-gradient(90deg,rgba(111,125,255,.55),rgba(111,125,255,.15))}
+.step p{margin-top:12px;font-size:17px;color:#6c7385;display:flex;gap:10px;align-items:baseline}
+.step p b{font-family:Bahn;font-size:19px;font-weight:600;color:#4b5162}
+.step.done p{color:#fff}.step.done p b{color:var(--acc2)}
+.step.next p{color:#c3c9f7}.step.next p b{color:var(--acc)}
+/* main */
+.left{position:absolute;left:44px;top:182px;width:768px;bottom:40px;display:flex;flex-direction:column;gap:20px}
+.right{position:absolute;right:44px;top:182px;width:426px;bottom:40px;display:flex;flex-direction:column;gap:20px}
+.card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:22px;position:relative}
+.agent{padding:28px 30px 26px}
+.agent .who{display:flex;align-items:center;gap:14px;font-size:18px;color:#b9c0d2}
+.agent .who .av{width:44px;height:44px;border-radius:50%;background:conic-gradient(from 200deg,var(--acc),var(--acc2),var(--acc));display:grid;place-items:center;box-shadow:0 0 22px rgba(111,125,255,.5)}
+.agent .who b{color:#fff;font-weight:700;font-size:19px}
+.agent .q{margin-top:20px;font-size:31px;line-height:1.42;font-weight:700;letter-spacing:-.6px}
+.agent .q em{font-style:normal;background:linear-gradient(90deg,var(--acc2),#9aa6ff);-webkit-background-clip:text;color:transparent}
+.tags{margin-top:20px;display:flex;gap:10px}
+.tag{height:36px;padding:0 16px;border-radius:18px;border:1px solid rgba(63,210,255,.35);color:#bfefff;font-size:17px;display:flex;align-items:center;background:rgba(63,210,255,.07)}
+.voice{flex:1;padding:24px 30px;display:flex;flex-direction:column}
+.voice .top{display:flex;justify-content:space-between;align-items:center}
+.live{display:flex;align-items:center;gap:10px;font-size:17px;color:#bdf5da;font-weight:600}
+.live .num{font-size:24px;color:#fff;font-weight:400;margin-left:6px;letter-spacing:.5px}
+.ctrl{display:flex;gap:10px}
+.ctrl span{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.ctrl span.end{background:rgba(255,86,86,.16);border-color:rgba(255,86,86,.45)}
+.people{flex:1;display:grid;grid-template-columns:1fr 160px 1fr;align-items:center;margin-top:10px}
+.person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.person .ring{width:96px;height:96px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+.person .ring.b{background:linear-gradient(135deg,var(--warm),#ffd36e)}
+.person .ring div{width:100%;height:100%;border-radius:50%;background:#0d0f15;display:grid;place-items:center}
+.person .mono{font-size:38px;font-weight:800;font-style:italic;color:#c9d0ff}
+.person .mono.b{color:#ffc79e}
+.person b{font-size:22px;font-weight:700}
+.person small{font-size:16px;color:var(--mute)}
+.wave{display:flex;align-items:center;justify-content:center;gap:5px;height:80px}
+.wave i{display:block;width:6px;border-radius:3px;background:linear-gradient(180deg,var(--acc2),var(--acc))}
+.meet{padding:28px 28px 26px}
+.meet .k{font-size:16px;color:var(--acc2);font-weight:700;letter-spacing:1px;font-family:Bahn,NotoKR}
+.meet h2{margin-top:10px;font-size:29px;line-height:1.35;font-weight:800;letter-spacing:-.6px}
+.rows{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:14px;align-items:flex-start;font-size:18px;color:#d5dae6}
+.row .ic{width:34px;height:34px;border-radius:10px;background:rgba(111,125,255,.14);display:grid;place-items:center;flex-shrink:0}
+.row small{display:block;color:var(--mute);font-size:15px;margin-top:2px}
+.both{margin-top:18px;font-size:15px;color:var(--mute);display:flex;gap:8px;align-items:center}
+.btn{height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:21px;font-weight:800}
+.btn.pri{margin-top:20px;background:linear-gradient(100deg,#5b69ff 0%,#3fb9ff 100%);box-shadow:0 10px 30px rgba(80,120,255,.35)}
+.btn.sec{margin-top:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#cdd3e1;font-weight:600}
+.priv{padding:20px 24px;display:flex;gap:14px;align-items:flex-start}
+.priv .ic{width:40px;height:40px;border-radius:12px;background:rgba(55,226,155,.12);display:grid;place-items:center;flex-shrink:0}
+.priv p{font-size:16.5px;line-height:1.5;color:#c9cfdc}
+.priv p b{color:#fff}
+/* dock */
+.dock{position:absolute;left:22px;right:22px;bottom:12px;height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 26px}
+.dock .cl{display:flex;align-items:center;gap:18px;font-size:18px;color:#9aa1b2}
+.dock .cl b{font-family:Bahn;font-size:30px;font-weight:400;color:#e7eaf2}
+.dock .mid{display:flex;gap:30px;align-items:center}
+.dock .mid span{width:52px;height:52px;border-radius:14px;display:grid;place-items:center}
+.dock .mid span.on{background:linear-gradient(135deg,var(--acc),#4e5af0);box-shadow:0 0 20px rgba(111,125,255,.55)}
+</style></head>
+<body>
+<div class="screen">
+  <div class="status"><span>LTE</span><svg width="22" height="16" viewBox="0 0 22 16"><rect x="0" y="11" width="4" height="5" rx="1" fill="#9aa1b2"/><rect x="6" y="7" width="4" height="9" rx="1" fill="#9aa1b2"/><rect x="12" y="3" width="4" height="13" rx="1" fill="#9aa1b2"/><rect x="18" y="0" width="4" height="16" rx="1" fill="#555b6a"/></svg><span class="num">16:53</span></div>
+
+  <!-- Driving view -->
+  <div class="drive">
+    <div class="speed"><b>0</b><small>km/h</small></div>
+    <div class="gears"><span class="on">P</span><span>R</span><span>N</span><span>D</span></div>
+    <div class="park"><span class="dot"></span>주차 중 · 앱 사용 가능</div>
+    <div class="map">
+      <svg width="504" height="520" viewBox="0 0 504 520">
+        <defs>
+          <linearGradient id="rt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f7dff"/><stop offset="1" stop-color="#3fd2ff"/></linearGradient>
+          <radialGradient id="zone" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#6f7dff" stop-opacity=".28"/><stop offset="1" stop-color="#6f7dff" stop-opacity="0"/></radialGradient>
+          <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#11151d" stroke-width="1"/></pattern>
+        </defs>
+        <rect width="504" height="520" fill="url(#grid)"/>
+        <!-- sea -->
+        <path d="M0 0 H210 C190 60 150 90 140 150 C128 220 92 250 70 320 C52 380 40 450 0 520 Z" fill="#0a1220"/>
+        <path d="M210 0 C190 60 150 90 140 150 C128 220 92 250 70 320 C52 380 40 450 0 520" fill="none" stroke="#1d2a40" stroke-width="2"/>
+        <!-- land contours -->
+        <path d="M300 520 C330 430 420 400 504 380" fill="none" stroke="#141a24" stroke-width="2"/>
+        <path d="M260 520 C300 410 400 360 504 330" fill="none" stroke="#141a24" stroke-width="2"/>
+        <path d="M330 0 C350 90 420 140 504 150" fill="none" stroke="#141a24" stroke-width="2"/>
+        <!-- inland roads -->
+        <path d="M240 60 C300 120 360 160 504 210" fill="none" stroke="#1a1f2a" stroke-width="5" stroke-linecap="round"/>
+        <path d="M180 300 C260 300 340 280 504 270" fill="none" stroke="#1a1f2a" stroke-width="5" stroke-linecap="round"/>
+        <!-- zone -->
+        <ellipse cx="190" cy="250" rx="190" ry="200" fill="url(#zone)"/>
+        <ellipse cx="190" cy="250" rx="168" ry="178" fill="none" stroke="#6f7dff" stroke-opacity=".35" stroke-dasharray="6 8"/>
+        <!-- coastal route -->
+        <path d="M262 52 C222 92 196 128 186 176 C174 236 142 266 124 326 C112 368 104 404 88 446" fill="none" stroke="#1d2230" stroke-width="16" stroke-linecap="round"/>
+        <path d="M262 52 C222 92 196 128 186 176 C174 236 142 266 124 326 C112 368 104 404 88 446" fill="none" stroke="url(#rt)" stroke-width="7" stroke-linecap="round"/>
+        <!-- me -->
+        <circle cx="262" cy="52" r="20" fill="#6f7dff" fill-opacity=".25"/>
+        <circle cx="262" cy="52" r="9" fill="#fff" stroke="#6f7dff" stroke-width="4"/>
+        <!-- meet point -->
+        <g transform="translate(88 446)"><circle r="22" fill="#3fd2ff" fill-opacity=".18"/><path d="M0 -26 C-12 -26 -18 -17 -18 -9 C-18 4 0 18 0 18 C0 18 18 4 18 -9 C18 -17 12 -26 0 -26 Z" fill="#3fd2ff"/><circle cy="-10" r="6" fill="#06080c"/></g>
+        <text x="286" y="58" fill="#e8ebf3" font-size="19" font-family="NotoKR" font-weight="700">애월 · 현재 위치</text>
+        <text x="118" y="452" fill="#e8ebf3" font-size="19" font-family="NotoKR" font-weight="700">협재 해변 카페</text>
+        <text x="118" y="476" fill="#8d95a8" font-size="15" font-family="NotoKR">1차 만남 후보 · 공개 장소</text>
+        <text x="236" y="300" fill="#aab3ff" font-size="16" font-family="NotoKR" font-weight="600">서쪽 해안도로 권역</text>
+        <text x="236" y="322" fill="#8d95a8" font-size="14" font-family="NotoKR">정확한 위치는 공유되지 않음</text>
+      </svg>
+    </div>
+    <div class="dfoot">
+      <div class="loc">애월 해안도로<small>제주 · 18°C 맑음</small></div>
+      <div class="rng">주행 가능<b class="num">412 km</b></div>
+    </div>
+  </div>
+
+  <!-- App window -->
+  <div class="app">
+    <div class="head">
+      <div class="brand">
+        <div class="logo"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M4 5h18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-6 5v-5H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#fff"/><path d="M8 13l4-4 3 3 4-4" fill="none" stroke="#5b69ff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h1>말문이 트립<i>!</i></h1>
+      </div>
+      <div class="badges">
+        <div class="badge"><svg width="16" height="18" viewBox="0 0 16 18"><rect x="1" y="8" width="14" height="10" rx="3" fill="#37e29b"/><path d="M4 8V5a4 4 0 0 1 8 0v3" fill="none" stroke="#37e29b" stroke-width="2"/></svg>익명 모드</div>
+        <div class="badge acc">내 닉네임 · 노을수집가</div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step done"><div class="bar"></div><p><b>01</b>익명 대화</p></div>
+      <div class="step next"><div class="bar"></div><p><b>02</b>1차 만남</p></div>
+      <div class="step"><div class="bar"></div><p><b>03</b>동행 결정</p></div>
+      <div class="step"><div class="bar"></div><p><b>04</b>정보 공개는 자유</p></div>
+    </div>
+
+    <div class="left">
+      <div class="card agent">
+        <div class="who"><div class="av"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M11 1l2.6 6.4L20 10l-6.4 2.6L11 19l-2.6-6.4L2 10l6.4-2.6z" fill="#fff"/></svg></div><b>AI 에이전트</b>· 대화를 이어 주는 중</div>
+        <p class="q">두 분 모두 오늘 <em>협재에서 노을</em>을 보실 계획이에요.<br>가장 기대되는 장면은 무엇인가요?</p>
+        <div class="tags"><span class="tag">#노을</span><span class="tag">#바다 앞 카페</span><span class="tag">#필름 사진</span><span class="tag">#서쪽 해안도로</span></div>
+      </div>
+      <div class="card voice">
+        <div class="top">
+          <div class="live"><span class="dot"></span>음성 대화 중<span class="num">12:48</span></div>
+          <div class="ctrl">
+            <span><svg width="18" height="22" viewBox="0 0 18 22"><rect x="5" y="1" width="8" height="13" rx="4" fill="#cdd3e1"/><path d="M2 10a7 7 0 0 0 14 0M9 17v4" fill="none" stroke="#cdd3e1" stroke-width="2" stroke-linecap="round"/></svg></span>
+            <span class="end"><svg width="22" height="12" viewBox="0 0 22 12"><path d="M1 7c6-6 14-6 20 0l-3 4-4-2V6c-2-1-4-1-6 0v3l-4 2z" fill="#ff6b6b"/></svg></span>
+          </div>
+        </div>
+        <div class="people">
+          <div class="person"><div class="ring"><div class="mono">노</div></div><b>노을수집가 (나)</b><small>노을 · 카페 · 사진</small></div>
+          <div class="wave">
+            <i style="height:18px"></i><i style="height:34px"></i><i style="height:56px"></i><i style="height:28px"></i><i style="height:70px"></i><i style="height:44px"></i><i style="height:24px"></i><i style="height:62px"></i><i style="height:36px"></i><i style="height:20px"></i><i style="height:48px"></i><i style="height:26px"></i><i style="height:14px"></i>
+          </div>
+          <div class="person"><div class="ring b"><div class="mono b">귤</div></div><b>귤빛드라이버</b><small>노을 · 카페 · 드라이브</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card meet">
+        <div class="k">NEXT · 1차 만남</div>
+        <h2>대화가 잘 통하네요.<br>협재에서 잠깐 만나 볼까요?</h2>
+        <div class="rows">
+          <div class="row"><span class="ic"><svg width="16" height="20" viewBox="0 0 16 20"><path d="M8 1C4 1 1 4 1 8c0 5 7 11 7 11s7-6 7-11c0-4-3-7-7-7z" fill="#8f9bff"/><circle cx="8" cy="8" r="2.6" fill="#10131a"/></svg></span><div>협재 해변 카페<small>사람이 많은 공개 장소</small></div></div>
+          <div class="row"><span class="ic"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7.5" fill="none" stroke="#8f9bff" stroke-width="2"/><path d="M9 4.5V9l3 2" fill="none" stroke="#8f9bff" stroke-width="2" stroke-linecap="round"/></svg></span><div><span class="num" style="font-size:20px">18:00 – 18:30</span><small>30분, 언제든 먼저 끝낼 수 있어요</small></div></div>
+          <div class="row"><span class="ic"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M2 16L16 2M16 2H8M16 2v8" fill="none" stroke="#8f9bff" stroke-width="2" stroke-linecap="round"/></svg></span><div>내 내비에 경유지로 추가<small>각자 차로 이동 · 내 경로 +6분</small></div></div>
+        </div>
+        <div class="both"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#8d95a8" stroke-width="1.6"/><path d="M5 8l2 2 4-4" fill="none" stroke="#8d95a8" stroke-width="1.6"/></svg>두 사람이 모두 수락해야 확정돼요</div>
+        <div class="btn pri">잠깐 만나기<svg width="22" height="16" viewBox="0 0 22 16"><path d="M1 8h18M13 2l6 6-6 6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="btn sec">오늘은 대화만 할게요</div>
+      </div>
+      <div class="card priv">
+        <span class="ic"><svg width="18" height="20" viewBox="0 0 16 18"><rect x="1" y="8" width="14" height="10" rx="3" fill="#37e29b"/><path d="M4 8V5a4 4 0 0 1 8 0v3" fill="none" stroke="#37e29b" stroke-width="2"/></svg></span>
+        <p><b>실명·연락처·차량번호는 공개되지 않아요.</b><br>동행이 정해지면 공개할 정보는 직접 골라요.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- dock -->
+  <div class="dock">
+    <div class="cl"><svg width="26" height="24" viewBox="0 0 26 24"><path d="M3 11L13 2l10 9v11H16v-7h-6v7H3z" fill="none" stroke="#9aa1b2" stroke-width="2" stroke-linejoin="round"/></svg><span>AUTO</span><b>22.5°</b></div>
+    <div class="mid">
+      <span><svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 11L21 3l-8 18-2-8z" fill="#c9cfdc"/></svg></span>
+      <span><svg width="22" height="24" viewBox="0 0 22 24"><path d="M8 18V4l12-3v14" fill="none" stroke="#c9cfdc" stroke-width="2.4"/><circle cx="5" cy="18" r="3.5" fill="#c9cfdc"/><circle cx="17" cy="15" r="3.5" fill="#c9cfdc"/></svg></span>
+      <span><svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 1l4 5-2.5 2.5c1.5 3 4 5.5 7 7L16 13l5 4-2 4C9 21 1 13 1 3z" fill="#37e29b"/></svg></span>
+      <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="5" cy="5" r="4" fill="#c9cfdc"/><circle cx="17" cy="5" r="4" fill="#c9cfdc"/><circle cx="5" cy="17" r="4" fill="#c9cfdc"/><circle cx="17" cy="17" r="4" fill="#c9cfdc"/></svg></span>
+      <span class="on"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M4 5h18a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-6 5v-5H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" fill="#fff"/></svg></span>
+      <span><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="#c9cfdc"/><path d="M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14M8 8a5.5 5.5 0 0 0 0 8M16 8a5.5 5.5 0 0 1 0 8" fill="none" stroke="#c9cfdc" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="cl"><b>22.5°</b><span>AUTO</span><svg width="22" height="26" viewBox="0 0 22 26"><path d="M6 2c-3 6 0 10 0 14h10c2-2 3-6 0-6H9" fill="none" stroke="#9aa1b2" stroke-width="2" stroke-linecap="round"/><path d="M5 20h12" stroke="#9aa1b2" stroke-width="2" stroke-linecap="round"/></svg></div>
+  </div>
+</div>
+</body></html>
